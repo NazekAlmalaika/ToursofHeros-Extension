@@ -1,0 +1,61 @@
+<form #movie="ngForm" [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+
+    <label for="director-name">Director Name: </label>
+    <input id="director-name" type="text" formControlName="directorName" required>
+    <div *ngIf="movieForm.controls['directorName'].invalid && (movieForm.controls['directorName'].dirty || movieForm.controls['directorName'].touched)" class="alert alert-danger">
+      Please enter the director name
+  </div>
+
+    <label for="title">Title: </label>
+    <input id="title" type="text" formControlName="title" required>
+    <div *ngIf="movieForm.controls['title'].invalid && (movieForm.controls['title'].dirty || movieForm.controls['title'].touched)" class="alert alert-danger">
+      Please enter the movie title
+  </div>
+
+    <label for="summary">Summary</label>
+    <input id="summary" type="text" formControlName="summary" required>
+    <div *ngIf="movieForm.controls['summary'].invalid && (movieForm.controls['summary'].dirty || movieForm.controls['summary'].touched)" class="alert alert-danger">
+      the  summary should not be less than 10 charactor
+  </div>
+
+  <div formGroupName="producer">
+    <h2>Producer</h2>
+
+    <label for="name">Name: </label>
+    <input id="name" type="text" formControlName="name" required>
+
+    <label for="age">Age: </label>
+    <input id="age" type="number" formControlName="age" required>
+  </div>
+
+    <div formArrayName="actors">
+      <h2>Actors</h2>
+      <button type="button" (click)="addActor()">+ Add another Actor</button>
+  
+      <div *ngFor="let actor of actors.controls; let i=index">
+
+        <label for="actor-{{ i }}">Name:</label>
+        <input id="actor-{{ i }}" type="text" [formControlName]="i" required>
+     
+        
+        <label for="actor-{{ i }}">Age:</label>
+        <input id="actor-{{ i }}" type="nubmer" [formControlName]="i" required>
+
+        <label for="actor-{{ i }}">Height:</label>
+        <input id="actor-{{ i }}" type="nubmer" [formControlName]="i" required>
+
+        <label for="actor-{{ i }}">Weight:</label>
+        <input id="actor-{{ i }}" type="nubmer" [formControlName]="i" required>
+
+      </div>
+    </div>
+
+    <p>Complete the form to enable button.</p>
+    <button type="submit" [disabled]="!movieForm.valid">Submit</button>
+
+    <button type="button" (click)="setMovieProfile()">Update Profile</button>
+  </form>
+
+  
+ 
+  

@@ -1,0 +1,91 @@
+<h2>My Movies</h2>
+<ul class="movies">
+    <li *ngFor="let movie of movies">
+        <a routerLink="/detail/{{movie.id}}">
+            <span class="badge">{{movie.id}}</span> Title : {{movie.title}} , DirectorName : {{movie.directorName}}
+        </a>
+        <button type="button" class="delete" title="delete movie" (click)="delete(movie)">x</button>
+    </li>
+</ul>
+<mat-sidenav-container>
+    <mat-sidenav-content>
+        <h2>Add a movie</h2>
+        <form #movie="ngForm" [formGroup]="movieForm" (ngSubmit)="onSubmit(movieForm)">
+            <div>
+                <mat-form-field class="example-full-width">
+                    <mat-label for="title">movie title</mat-label>
+                    <input matInput id="title" type="text" #movieTitle placeholder="movie title" formControlName="title" required/>
+                    <div *ngIf="movieForm.controls['title'].invalid && (movieForm.controls['title'].dirty || movieForm.controls['title'].touched)" class="alert alert-danger">
+                        Please enter the movie title
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label for="directorName">director name</mat-label>
+                    <input matInput id="directorName" type="text" #directorName placeholder="director name" formControlName="directorName" required/>
+                    <div *ngIf="movieForm.controls['directorName'].invalid && (movieForm.controls['directorName'].dirty || movieForm.controls['directorName'].touched)" class="alert alert-danger">
+                        Please enter the director name
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label for="summary">summary</mat-label>
+                    <input matInput id="summary" type="text" #summary placeholder="summary" formControlName="summary" required/>
+                    <div *ngIf="movieForm.controls['summary'].invalid && (movieForm.controls['summary'].dirty || movieForm.controls['summary'].touched)" class="alert alert-danger">
+                        the summary should not be less than 10 charactor
+                    </div>
+                </mat-form-field>
+
+                <div formGroupName="producer">
+                    <h2>Producer</h2>
+                    <mat-form-field class="example-full-width">
+                        <mat-label for="name">Name</mat-label>
+                        <input matInput id="name" type="text" #producerName placeholder="Name" formControlName="name" required>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label for="age">Age</mat-label>
+                        <input matInput id="age" type="number" #producerAge placeholder="Age" formControlName="age" required>
+                    </mat-form-field>
+                </div>
+
+                <div formArrayName="actors">
+                    <h2>Actors</h2>
+                    <button type="button" [disabled]="addActorFirstClick" (click)="addActor(); addActorFirstClick=true; addActorSecondClick=false">+ Add an actor</button>
+
+                    <div *ngFor="let actorForm of actors.controls; let i= index">
+                        <div [formGroup]="actorForm">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label for="name">Name</mat-label>
+                                <input matInput id="name" type="text" placeholder="Name" formControlName="name" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label for="age">Age</mat-label>
+                                <input matInput id="age" type="nubmer" placeholder="Age" formControlName="age" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label for="height">Height</mat-label>
+                                <input matInput id="height" type="nubmer" placeholder="Height" formControlName="height" required>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label for="weight">Weight:</mat-label>
+                                <input matInput id="weight" type="nubmer" placeholder="Weight" formControlName="weight" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                </div>
+                <button type="reset" [disabled]="addActorSecondClick" (click)="resetAddActorForm();"> Add a new actor</button>
+
+                <button type="submit">save</button>
+                <!--<button type="submit" [disabled]="!movieForm.valid">Save</button> -->
+                <button type="button" class="add-button" (click)="movieTitle.value=''; directorName.value=''; summary.value='' ;producerName.value=''; producerAge.value=0; "> Add a new movie</button>
+
+            </div>
+        </form>
+    </mat-sidenav-content>
+</mat-sidenav-container>

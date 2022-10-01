@@ -1,0 +1,21 @@
+<h1>Reactive Forms</h1>
+
+<nav>
+  <button type="button" (click)="toggleEditor('name')">Name Editor</button>
+  <button type="button" (click)="toggleEditor('profile')">Profile Editor</button>
+  <button type="button" (click)="toggleEditor('movie')">Movie Editor</button>
+  <button type="button" (click)="toggleEditor('movies')">Movies</button>
+</nav>
+
+<app-name-editor *ngIf="showNameEditor"></app-name-editor>
+
+<app-profile-editor *ngIf="showProfileEditor"></app-profile-editor>
+
+<app-movie-editor *ngIf="showMovieEditor"></app-movie-editor>
+
+<app-movies  *ngIf="showMovies"></app-movies>
+
+<router-outlet></router-outlet>
+
+
+ 

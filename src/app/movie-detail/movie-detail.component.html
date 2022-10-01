@@ -1,0 +1,43 @@
+<mat-sidenav-container>
+  <mat-sidenav-content>
+<div *ngIf="movie">
+
+    <h3>update movie : {{movie.title}} </h3>
+    <mat-form-field class="example-full-width">
+        <label for="title">title: </label>
+        <input matInput id="title" [(ngModel)]="movie.title" placeholder="title" required>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <label for="director">director: </label>
+        <input matInput id="director" [(ngModel)]="movie.directorName" placeholder="director" required>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <label for="summary">summary: </label>
+        <input matInput id="summary" [(ngModel)]="movie.summary" placeholder="summary" required>
+      </mat-form-field>
+
+    <div>
+      <mat-form-field class="example-full-width">
+            <label for="producer name">producer name: </label>
+            <input matInput id="producer name" [(ngModel)]="movie.producer.name" placeholder="producer name" required>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+            <label for="producer age">producer age: </label>
+            <input matInput id="producer age" [(ngModel)]="movie.producer.age" placeholder="producer age" required>
+          </mat-form-field>
+    </div>
+    <div *ngIf="actors">
+        <!-- loop over actors in a specific movie -->
+        <app-actors> </app-actors>
+    </div>
+</div>
+<div>
+  <button type="button" (click)="updateMovie()">save</button>
+  <button type="button" (click)="goBack()">go back</button>
+</div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

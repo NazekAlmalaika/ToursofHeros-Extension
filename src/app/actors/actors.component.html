@@ -1,0 +1,55 @@
+<mat-sidenav-container>
+    <mat-sidenav-content>
+        <h3>update actors</h3>
+
+
+        <ul class="actors">
+            <li *ngFor="let actor of actors">
+
+                <a routerLink="/actorDetail/{{actor.id}}">
+                    <span class="badge">{{actor.id}}</span> name : {{actor.name}} , Age : {{actor.age}}
+                </a>
+                <button type="button" class="delete" title="delete movie" (click)="deleteActor(actor)">x</button>
+            </li>
+        </ul>
+
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+
+            <div formArrayName="actor">
+                <button type="button" [disabled]="clicked" (click)="addActor(); clicked=true;">+ Add an actor</button>
+
+                <div *ngFor="let actorForm of actor.controls; let i= index">
+                    <div [formGroup]="actorForm">
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label for="name">Name</mat-label>
+                            <input matInput id="name" type="text" placeholder="Name" #name formControlName="name" required>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label for="age">Age</mat-label>
+                            <input matInput id="age" type="nubmer" placeholder="Age" #age formControlName="age" required>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label for="height">Height</mat-label>
+                            <input matInput id="height" type="nubmer" placeholder="Height" #height formControlName="height" required>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label for="weight">Weight</mat-label>
+                            <input matInput id="weight" type="nubmer" placeholder="Weight" #weight formControlName="weight" required>
+                        </mat-form-field>
+
+
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="!form.valid">Save actor</button>
+
+            </div>
+            <button type="reset" (click)="resetAddActorForm()"> Reset </button>
+        </form>
+    </mat-sidenav-content>
+</mat-sidenav-container>

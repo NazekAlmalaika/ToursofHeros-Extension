@@ -1,0 +1,32 @@
+<mat-sidenav-container>
+  <mat-sidenav-content>
+<div *ngIf="actor">
+    <h3>update actor : {{actor.name}} </h3>
+
+    <mat-form-field class="example-full-width">
+      <label for="name">name: </label>
+      <input matInput id="name" [(ngModel)]="actor.name" placeholder="name" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <label for="age">age: </label>
+        <input matInput id="age" [(ngModel)]="actor.age" placeholder="age" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <label for="weight">weight: </label>
+        <input matInput id="weight" [(ngModel)]="actor.weight" placeholder="weight" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <label for="height">height: </label>
+        <input matInput id="height" [(ngModel)]="actor.height" placeholder="height" required>
+      </mat-form-field>
+</div>
+<div>
+  <button type="button" (click)="updateActor()">save</button>
+  <button type="button" (click)="goBack()">go back</button>
+</div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
